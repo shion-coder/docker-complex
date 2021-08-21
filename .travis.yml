@@ -1,0 +1,16 @@
+language: generic
+sudo: required
+services:
+  - docker
+
+before_install:
+  - docker build -t shioncoder/react-test -f ./client/Dockerfile.dev ./client
+
+script:
+  - docker run -e CI=true shioncoder/react-test npm run test
+
+after_success:
+  - docker build -t shioncoder/complex-client ./client
+  - docker build -t shioncoder/complex-server ./server
+  - docker build -t shioncoder/complex-nginx ./nginx
+  - docker build -t shioncoder/complex-worker ./worker
