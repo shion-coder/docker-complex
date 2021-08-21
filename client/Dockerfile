@@ -4,7 +4,7 @@ COPY package*.json ./
 RUN npm install && npm cache clean --force
 COPY . .
 
-RUN npm run builder
+RUN npm run build
 
 FROM nginx
 EXPOSE 3000
