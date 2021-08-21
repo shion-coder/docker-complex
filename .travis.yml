@@ -14,3 +14,8 @@ after_success:
   - docker build -t shioncoder/complex-server ./server
   - docker build -t shioncoder/complex-nginx ./nginx
   - docker build -t shioncoder/complex-worker ./worker
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+  - docker push shioncoder/complex-client
+  - docker push shioncoder/complex-server
+  - docker push shioncoder/complex-nginx
+  - docker push shioncoder/complex-worker
